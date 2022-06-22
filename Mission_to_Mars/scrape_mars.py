@@ -25,5 +25,54 @@ def scrape():
     # Get the first news from the url 
     news_title = news_soup.find("div", class_="content_title").get_text()
 
-    # 
+    # Get the first paragraph of the news 
+    news_p = news_soup.find("div", class_="article_teaser_body").get_text()
+
+    #JPL Mars Space Images—Featured Image
+    # URL path
+    url = 'https://spaceimages-mars.com/'
+    browser.visit(url)
+
+    html = browser.html
+    image_soup = bs(html, "html.parser")
+
+    image_soup = browser.find_by_tag('button')[1]
+    image_soup.click()
+
+    html = browser.html
+    newpage_soup = bs(html, "html.parser")
+
+    mars_image = newpage_soup.select_one('img.headerimage').get("src")
+
+    featured_image_url = f'https://spaceimages-mars.com/{mars_image}'
+
+    df = pd.read_html('https://galaxyfacts-mars.com/')[0]
+
+    df.columns=['Description', 'Mars', 'Earth']
+    df.set_index('Description', inplace=True)
+
+    url = 'https://marshemispheres.com/'
+    browser.visit(url)
+
+    hemisphere_image_urls = []
+
+    links = browser.find_by_css('a.product-item img')
+
+    for i in range(4):
+        hemisphere = {}
+    
+        browser.find_by_css('a.product-item img')[i].click()
+        sample_elem = browser.links.find_by_text('Sample').first
+        hemisphere['img_url'] = sample_elem['href']
+    
+        hemisphere['title'] = browser.find_by_css('h2.title').text
+        hemisphere_image_urls.append(hemisphere)
+    
+        browser.back()
+
+    browser.quit()        
+
+
+
+
 

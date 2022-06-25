@@ -1,12 +1,7 @@
 # Web-Scraping-Challenge - Mission_to_Mars
 
-<<<<<<< HEAD
+
 ![mission_to_mars](Missions_to_Mars/Images/mission_to_mars.png)
-=======
-![mission_to_mars](Mission_to_Mars/Images/mission_to_mars.png)
-
-
->>>>>>> b2153610ec2c80246234dff321027888f7eb4f4d
 
 In this project I'm building a web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page.
 
@@ -25,8 +20,7 @@ Complete your initial scraping using Jupyter Notebook, BeautifulSoup, Pandas, an
 * Create a Jupyter Notebook file called `mission_to_mars.ipynb` and use this to complete all of your scraping and analysis tasks. The following outlines what you need to scrape.
 
 ### NASA Mars News
-<<<<<<< HEAD
-=======
+
 
 * Scrape the [NASA Mars News Site](https://redplanetscience.com/) and collect the latest News Title and Paragraph Text. Assign the text to variables that you can reference later.
 
@@ -72,8 +66,3 @@ Use MongoDB with Flask templating to create a new HTML page that displays all of
 * Create a template HTML file called `index.html` that will take the mars data dictionary and display all of the data in the appropriate HTML elements. Use the following as a guide for what the final product should look like, but feel free to create your own design.
 
 
-
-
-
-
->>>>>>> b2153610ec2c80246234dff321027888f7eb4f4d

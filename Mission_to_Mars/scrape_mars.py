@@ -20,13 +20,16 @@ def scrape():
     # Save HTML and parser
     html = browser.html
     news_soup = bs(html, "html.parser")
+    news_soup
 
 
     # Get the first news from the url 
     news_title = news_soup.find("div", class_="content_title").get_text()
+    news_title
 
     # Get the first paragraph of the news 
     news_p = news_soup.find("div", class_="article_teaser_body").get_text()
+    news_p
 
     #JPL Mars Space Images—Featured Image
     # URL path
@@ -41,15 +44,20 @@ def scrape():
 
     html = browser.html
     newpage_soup = bs(html, "html.parser")
+    newpage_soup
 
     mars_image = newpage_soup.select_one('img.headerimage').get("src")
+    mars_image
 
     featured_image_url = f'https://spaceimages-mars.com/{mars_image}'
+    featured_image_url
 
     df = pd.read_html('https://galaxyfacts-mars.com/')[0]
+    df.head()
 
     df.columns=['Description', 'Mars', 'Earth']
     df.set_index('Description', inplace=True)
+    df
 
     url = 'https://marshemispheres.com/'
     browser.visit(url)
@@ -69,6 +77,8 @@ def scrape():
         hemisphere_image_urls.append(hemisphere)
     
         browser.back()
+
+    hemisphere_image_urls 
 
     browser.quit()        
 

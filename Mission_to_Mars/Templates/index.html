@@ -14,7 +14,7 @@
   <div class="container-fluid">
     <div style="background:transparent !important" class="jumbotron text-center">
     	<h1>Mission to Mars</h1>
-		<p><a class="btn btn-primary btn-lg" href="Mission_to_Mars/scrape_mars.py" role="button">Scrape New Data</a></p>
+		<p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
 	</div>
 	
 	<div style="background:transparent !important" class="jumbotron text-center">
@@ -23,8 +23,9 @@
 				<div class='col-md-12'>
                     <hr>
                     <h2 style="text-align:left;"><b>Latest Mars News:</b></h3>
+                    <h4 style="text-align:left;">{{ mission.news_date }}</h4>
 					<h3 style="text-align:left;">{{ mission.news_title }}</h4>
-					<p style="text-align:left;">{{ mission.news_p }}</p>
+					<p style="text-align:left;">{{ mission.news_text }}</p>
 					<hr>
 				</div>	
 			</div>
@@ -100,8 +101,8 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class='thumbnail'>
-								<img src="{{ mission.img_url }}" class='img-responsive' alt="{{ mission.title }}">
-								<h4>{{ mission.title }}</h4>
+								<img src="{{ mission.url1_img }}" class='img-responsive' alt="{{ mission.url1_title }}">
+								<h4>{{ mission.url1_title }}</h4>
 							</div>	
 						</div>
 						<div class="col-md-6">

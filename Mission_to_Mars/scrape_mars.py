@@ -47,22 +47,21 @@ def scrape():
     newpage_soup
 
     mars_image = newpage_soup.select_one('img.headerimage').get("src")
-    mars_image
+  
 
     featured_image_url = f'https://spaceimages-mars.com/{mars_image}'
-    featured_image_url
+   
 
     df = pd.read_html('https://galaxyfacts-mars.com/')[0]
     df.head()
 
-    df.columns=['Description', 'Mars', 'Earth']
-    df.set_index('Description', inplace=True)
-    df
+    table_data = df.values.tolist()
+  
 
     url = 'https://marshemispheres.com/'
     browser.visit(url)
 
-    hemisphere_image_urls = []
+    hem_img_urls = []
 
     links = browser.find_by_css('a.product-item img')
 
@@ -74,27 +73,11 @@ def scrape():
         hemisphere['img_url'] = sample_elem['href']
     
         hemisphere['title'] = browser.find_by_css('h2.title').text
-        hemisphere_image_urls.append(hemisphere)
+        hem_img_urls.append(hemisphere)
     
         browser.back()
 
-    hemisphere_image_urls 
-
-
-        # DataBase dictionary
-    mars_web_dict={
-    'news_title': news_title, 'news_text': news_p,
-    'featured_image_url': featured_image_url,
-    'row1_title': table_data[0]['title'], 'row1_value': table_data[0]['value'],
-    'row2_title': table_data[1]['title'], 'row2_value': table_data[1]['value'],
-    'row3_title': table_data[2]['title'], 'row3_value': table_data[2]['value'], 
-    'row4_title': table_data[3]['title'], 'row4_value': table_data[3]['value'], 
-    'row5_title': table_data[4]['title'], 'row5_value': table_data[4]['value'],  
-    'url1_title': hem_img_urls[0]['title'], 'url1_img': hem_img_urls[0]['img_url'],
-    'url2_title': hem_img_urls[1]['title'], 'url2_img': hem_img_urls[1]['img_url'],
-    'url3_title': hem_img_urls[2]['title'], 'url3_img': hem_img_urls[2]['img_url'],
-    'url4_title': hem_img_urls[3]['title'], 'url4_img': hem_img_urls[3]['img_url']              
-    }
+    hem_img_urls 
 
     browser.quit()        
 

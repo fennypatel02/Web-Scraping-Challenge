@@ -20,16 +20,13 @@ def scrape():
     # Save HTML and parser
     html = browser.html
     news_soup = bs(html, "html.parser")
-    news_soup
 
 
     # Get the first news from the url 
     news_title = news_soup.find("div", class_="content_title").get_text()
-    news_title
 
     # Get the first paragraph of the news 
     news_p = news_soup.find("div", class_="article_teaser_body").get_text()
-    news_p
 
     #JPL Mars Space Images—Featured Image
     # URL path
@@ -44,8 +41,7 @@ def scrape():
 
     html = browser.html
     newpage_soup = bs(html, "html.parser")
-    newpage_soup
-
+  
     mars_image = newpage_soup.select_one('img.headerimage').get("src")
   
 

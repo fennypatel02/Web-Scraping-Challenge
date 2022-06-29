@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup as bs
 import time
 from webdriver_manager.chrome import ChromeDriverManager
 
-
+data = {}
 def scrape():
     # Chromedriver execution
     executable_path = {'executable_path': ChromeDriverManager().install()}
@@ -16,6 +16,7 @@ def scrape():
     #URL path
     url = 'https://redplanetscience.com/'
     browser.visit(url)
+    browser.is_element_present_by_css('div.list_text', wait_time=1)
 
     # Save HTML and parser
     html = browser.html
@@ -24,9 +25,11 @@ def scrape():
 
     # Get the first news from the url 
     news_title = news_soup.find("div", class_="content_title").get_text()
+    data["news_title"] = news_title
 
     # Get the first paragraph of the news 
     news_p = news_soup.find("div", class_="article_teaser_body").get_text()
+    data["news_p"] = news_p
 
     #JPL Mars Space Images—Featured Image
     # URL path
@@ -46,12 +49,15 @@ def scrape():
   
 
     featured_image_url = f'https://spaceimages-mars.com/{mars_image}'
+    data["featured_image_url"] = featured_image_url
    
 
     df = pd.read_html('https://galaxyfacts-mars.com/')[0]
-    df.head()
+    df.columns=['Description', 'Mars', 'Earth']
+    df.set_index('Description', inplace=True)
 
-    table_data = df.values.tolist()
+   
+    data["table_data"] = df.to_html(classes="table table-striped")
   
 
     url = 'https://marshemispheres.com/'
@@ -73,9 +79,14 @@ def scrape():
     
         browser.back()
 
-    hem_img_urls 
+    data["hem_img_urls"] = hem_img_urls 
+   
 
-    browser.quit()        
+    browser.quit()   
+
+    return data
+
+
 
 
 
